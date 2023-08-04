@@ -89,6 +89,7 @@ async def get_items():
         shortcut_files = glob.glob(desktop_folder + "/*.lnk")
         app_paths = [subprocess.check_output(['powershell', '-command', '(New-Object -COM WScript.Shell).CreateShortcut("{}").TargetPath'.format(shortcut)]).decode().strip() for shortcut in shortcut_files]
         apps = [Executable(path=path, id=idx) for idx, path in enumerate(app_paths)]
+        print(jsons.dump(apps))
     
     return apps
 
